@@ -1,5 +1,6 @@
 import asyncio, logging, traceback, os
 import time
+from database import init_db
 from collections import defaultdict
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (
@@ -1498,6 +1499,8 @@ async def unban_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     application = Application.builder().token(BOT_TOKEN).build()
+
+    asyncio.run(init_db())
 
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, review_text_message_handler), group=-1)
 
