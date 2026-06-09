@@ -25,12 +25,13 @@ async def _add_column_if_missing(db, table: str, column: str, ddl: str):
 async def init_db():
     async with _connect() as db:
         await db.execute("""
-CREATE TABLE IF NOT EXISTS banned_users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
     username TEXT,
-    reason TEXT,
-    banned_by INTEGER,
-    created_at TEXT NOT NULL
+    first_name TEXT,
+    last_name TEXT,
+    created_at TEXT,
+    updated_at TEXT
 )
 """)
 
